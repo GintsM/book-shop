@@ -1,2 +1,5 @@
-# book-shop
-pure JS (css to style). hardcoded books, so no You can not by them, from here :)
+# Book-shop
+
+Page created using JS.
+
+Link to see live will be placed [here ... soon](https://github.com/GintsM/book-shop) 
