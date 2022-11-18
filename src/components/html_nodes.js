@@ -1,7 +1,42 @@
+const uniq_id = () => Date.now().toString();
+
 const newTag = (tag, options) => {
   return Object.assign(document.createElement(tag), options);
 }
 
+//  ______________________ DRAG AND DROP ________________________________
+const dragstart = (e) => {
+  e.dataTransfer.setData('text', e.target.id);
+  e.target.classList.add('darkerborder');
+}
+
+const dragEnter = (e) => {
+  e.preventDefault();
+}
+
+const dragOver = (e) => {
+  e.preventDefault();
+  const basket = document.querySelector('.basket');
+  basket.classList.add('darkerborder');
+}
+
+const dragend = (e) => {
+  e.target.classList.remove('darkerborder');
+  const basket = document.querySelector('.basket');
+  basket.classList.remove('darkerborder')
+}
+
+const drop = (e) => {
+  const id = e.dataTransfer.getData('text');
+  const nodeCopy = document.getElementById(id);
+  nodeCopy.classList.remove('darkerborder');
+  console.log(nodeCopy.firstChild.nextSibling, " e ", e.target);
+  add_to_basket(nodeCopy.firstChild.nextSibling);
+  const basket = document.querySelector('.basket');
+  basket.classList.remove('darkerborder');
+}
+
+//  ______________________ CLICK EVENTS ________________________________
 const popUp = (e) => {
   const e_parent = e.target.parentNode.parentNode.parentNode
   if (e_parent.classList.contains('main_book_cred')) {
@@ -16,35 +51,27 @@ const closePop = (e) => {
   });
 }
 
-const add_to_basket = (e) => {
+export const add_to_basket = (e) => {
   const basket = document.querySelector('.basket');
-  // console.log(basket.childElementCount, " :count nodes")
-  const e_parent = e.target.parentNode.parentNode.parentNode; // if drag should create another
+  let e_parent = {};
+  e.type === 'click' ? e_parent = e.target.parentNode.parentNode.parentNode : e_parent = e;
   const e_image = e_parent.previousSibling.cloneNode(true);
   const p_prime = e_parent.cloneNode(true);
-  const uniq_id = Date.now().toString()
-  const main_book = newTag('div', { className: 'main_book_card', id: uniq_id }); // can change this name
+
+  const main_book = newTag('div', { className: 'main_book_card' }); // can change this name
   const span = newTag('span', { className: 'close_x for_basket', innerText: 'x' });
-  span.setAttribute('data-id', uniq_id);
-  span.addEventListener('click', removeNode);  // function is down in file
+  span.addEventListener('click', removeNode);
   main_book.append(e_image, p_prime, span)
   const firstChild = basket.firstChild;
   basket.insertBefore(main_book, firstChild);
 }
 
 const removeNode = (e) => {
-  const basket = document.querySelector('.basket');
-  let i = 0;
-  for (const child of basket.children) {
-    if (e.target.dataset.id === child.id) {
-      console.log(child, i, "from remove", basket.childNodes[i]);
-      break;
-    }
-    ++i;
-  }
-  console.log(basket.removeChild(basket.children[i]), " : Should remove")
+  const container_head = e.target.parentNode
+  container_head.remove();
 }
 
+//  ______________________ Creating a nodes ________________________________
 const pop_Up_node = (book_title, book_description) => {
   const book_info = newTag('div', { className: 'book_info hide' });
   const b_descritpion = newTag('div', { className: 'b_description' });
@@ -65,10 +92,10 @@ const pop_Up_node = (book_title, book_description) => {
 export const bookCard = (img, book_author, book_title, book_price, book_description, mainShelfs = false) => {
   // mainShelfs is to determine were call is coming    
   // <div class="main_book_card">
-  const main_book = newTag('div', { className: 'main_book_card' });
+  const main_book = newTag('div', { className: 'main_book_card', id: uniq_id(), draggable: true });
 
-  const img_cont = newTag('div', { className: 'main_img_cont' })
-  const image = newTag('img', { src: img, alt: book_title })
+  const img_cont = newTag('div', { className: 'main_img_cont', draggable: false });
+  const image = newTag('img', { src: img, alt: book_title });
   img_cont.append(image);
   main_book.append(img_cont);
 
@@ -94,6 +121,8 @@ export const bookCard = (img, book_author, book_title, book_price, book_descript
   main_book.append(book_cred);
 
   if (mainShelfs) main_book.append(pop_Up_node(book_title, book_description));
+  main_book.addEventListener('dragstart', dragstart);
+  main_book.addEventListener('dragend', dragend);
 
   return main_book;
 }
@@ -132,6 +161,10 @@ export const mainTag = () => {
   const main_1_Div = newTag('div', { className: 'oval_top' });
   const choice = newTag('div', { className: 'choice' });
   const basket = newTag('div', { className: 'basket' });
+  basket.addEventListener('dragenter', dragEnter)
+  basket.addEventListener('dragover', dragOver);
+  // basket.addEventListener('dragleave', dragLeave);
+  basket.addEventListener('drop', drop);
   const hr = newTag('hr', {});
   basket.append(hr);
   basket.append(summary());
