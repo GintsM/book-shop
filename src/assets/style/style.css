@@ -1,3 +1,151 @@
 body {
   margin: auto;
 }
+
+.flex_row {
+  display: flex;
+}
+
+header {
+  background-color: #000;
+  justify-content: space-around;
+  align-items: center;
+  height: 4em;
+}
+
+
+.logo {
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 120%;
+  text-align: center;
+  color: #fff;
+  width: 82px;
+  box-sizing: border-box;
+  border: 1px solid #fff;
+  border-radius: 2px;
+}
+
+#primary-navigation>a>img {
+  width: 22%;
+}
+
+body>header>p {
+  color: #fff;
+}
+
+/* Main */
+
+main {
+
+  background-color: #000;
+  /* border-radius: 6%; */
+  padding: 1%;
+}
+
+.oval_top {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  background-color: #fff;
+  gap: 18px;
+  border-radius: 48% 48% 0 0;
+  padding: 17% 7% 16px;
+}
+
+.choise,
+.basket {
+  padding-block: 2%;
+  padding-inline: 25px;
+  background-color: #eabc84;
+}
+
+.choise {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px 10px;
+}
+
+.main_book_card {
+  position: relative;
+  display: grid;
+  background-color: #f0c99a;
+  grid-template-columns: 1fr 3fr;
+  gap: 12px;
+  padding: 2%;
+  border: 2px solid #bd9f7a;
+  border-radius: 8px;
+}
+
+/* pop up elem */
+.book_info {
+  position: absolute;
+  background: #cedbe6;
+  z-index: 1;
+}
+
+.b_description {
+  position: relative;
+  padding-inline: 4%;
+}
+
+.pop_title {
+  margin-block-end: auto;
+}
+
+.close_x {
+  position: absolute;
+  background-color: red;
+  color: #fff;
+  top: -10px;
+  right: 10px;
+  font-size: 22px;
+  line-height: 19px;
+  padding: 1px 2px 3px 3px;
+  cursor: pointer;
+}
+
+
+.main_img_cont>img {
+  width: 100%;
+}
+
+.basket {
+  padding-inline: 2%;
+  height: fit-content;
+}
+
+.basket_book {
+  margin-block: 0;
+  width: 85%;
+}
+
+.b_count {
+  display: inline;
+}
+
+/* replace close_x */
+.for_basket {
+  top: 10px;
+}
+
+.summary {
+  text-align: center;
+}
+
+footer {
+  color: #fff;
+  background-color: #000;
+  justify-content: space-around;
+}
+
+.hide {
+  display: none;
+}
+
+:visited {
+  color: inherit;
+}
+
+a {
+  text-decoration: none;
+}

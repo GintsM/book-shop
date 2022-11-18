@@ -1,32 +1,35 @@
-// import { bookCard } from "./bookCard_main.js"
+import { header, mainTag, footer, bookCard } from "./html_nodes.js";
 
-// const root = document.getElementById('root')
+const body = document.querySelector('body');
 
-// const newEl = document.createElement('div')
+const fragment = new DocumentFragment();
+fragment.append(header());
+fragment.append(mainTag());
+fragment.append(footer());
 
-// newEl.appendChild(bookCard("./books/images/appJs.jpg", "Addy Osmani", "Learning JavaScript Design Patterns", 32))
+body.append(fragment); // to have something on screen while loading
 
-// root.appendChild(newEl)
+const mainFunc = (data) => {
+  //  ... add new elements
 
-// let ptag = document.createElement('p')
+  // for (let i in data) {
+  //   // shorten name 'alias'
+  //   const sh = data[i];
+  //   const card = bookCard(sh.author, sh.imageLink, sh.title, sh.price);
+  //   // console.log(sh.author,sh.imageLink, sh.title, sh.price)
+  //   fragment.append(card);
+  // }
 
-// root.appendChild(ptag)
+  // const card = bookCard()
+}
 
-// let name = "John";
-// // // assuming 'el' is an HTML DOM element
-// // el.innerHTML = name; // harmless in this case
 
-// // …
-
-// let name1 = "<script>alert('I am John in an annoying alert!')</script>";
-// ptag.innerHTML = name; // harmless in this case
-// alert('I am John in an annoying alert!')
-
+// Sarting the engine !
 const url = './assets/books/books.json'
-const res = fetch(url) //path to the file with json data
+const res = fetch(url)
   .then(response => {
     return response.json();
   })
   .then(data => {
-    console.log(data);
+    mainFunc(data);
   });
