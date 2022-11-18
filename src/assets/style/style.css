@@ -49,17 +49,17 @@ main {
   background-color: #fff;
   gap: 18px;
   border-radius: 48% 48% 0 0;
-  padding: 17% 7% 16px;
+  padding: 22% 7% 16px;
 }
 
-.choise,
+.choice,
 .basket {
   padding-block: 2%;
   padding-inline: 25px;
   background-color: #eabc84;
 }
 
-.choise {
+.choice {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px 10px;

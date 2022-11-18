@@ -7,20 +7,21 @@ fragment.append(header());
 fragment.append(mainTag());
 fragment.append(footer());
 
-body.append(fragment); // to have something on screen while loading
+body.append(fragment); // to have something on screen while loading books
 
 const mainFunc = (data) => {
   //  ... add new elements
+  const choice = document.querySelector('.choice');
 
-  // for (let i in data) {
-  //   // shorten name 'alias'
-  //   const sh = data[i];
-  //   const card = bookCard(sh.author, sh.imageLink, sh.title, sh.price);
-  //   // console.log(sh.author,sh.imageLink, sh.title, sh.price)
-  //   fragment.append(card);
-  // }
+  for (let i in data) {
+    // shorten name 'alias'
+    const sh = data[i];
+    const card = bookCard(sh.imageLink, sh.author, sh.title, sh.price, sh.description);
+    // console.log(sh.author,sh.imageLink, sh.title, sh.price)
+    fragment.append(card);
+  }
 
-  // const card = bookCard()
+  choice.append(fragment);
 }
 
 
