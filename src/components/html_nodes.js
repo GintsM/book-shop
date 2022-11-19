@@ -30,7 +30,6 @@ const drop = (e) => {
   const id = e.dataTransfer.getData('text');
   const nodeCopy = document.getElementById(id);
   nodeCopy.classList.remove('darkerborder');
-  console.log(nodeCopy.firstChild.nextSibling, " e ", e.target);
   add_to_basket(nodeCopy.firstChild.nextSibling);
   const basket = document.querySelector('.basket');
   basket.classList.remove('darkerborder');
@@ -58,20 +57,61 @@ export const add_to_basket = (e) => {
   const e_image = e_parent.previousSibling.cloneNode(true);
   const p_prime = e_parent.cloneNode(true);
 
+  // change button content/ to make a counter
+  const price = p_prime.lastChild.firstChild.dataset.price;// get units elements price                      
+  p_prime.lastChild.lastChild.firstChild.innerText = '+';  // 'show more' to increment button
+  p_prime.lastChild.lastChild.firstChild.addEventListener('click', increment);
+  p_prime.lastChild.lastChild.lastChild.innerText = '-';   // 'add to bag' to decrement button
+  p_prime.lastChild.lastChild.lastChild.addEventListener('click', decrement);
+  const p_counter = newTag('p', { className: 'b_count', innerText: '1' });
+  p_prime.lastChild.lastChild.insertBefore(p_counter, p_prime.lastChild.lastChild.lastChild);
+
+  //update total sum
+  update_total(price);
   const main_book = newTag('div', { className: 'main_book_card' }); // can change this name
   const span = newTag('span', { className: 'close_x for_basket', innerText: 'x' });
   span.addEventListener('click', removeNode);
   main_book.append(e_image, p_prime, span)
-  const firstChild = basket.firstChild;
+  const firstChild = basket.firstChild;       // add new book to basket always as first 
   basket.insertBefore(main_book, firstChild);
 }
 
 const removeNode = (e) => {
+  const b_price = e.target.previousSibling.lastChild.firstChild;
+  const b_amount = b_price.nextSibling.firstChild.nextSibling.innerText;
+  const remove_sum = -Number(b_price.dataset.price) * Number(b_amount);
+  update_total(remove_sum);
+
+  // remove a node
   const container_head = e.target.parentNode
   container_head.remove();
 }
 
-//  ______________________ Creating a nodes ________________________________
+const increment = (e) => {
+  const b_price = e.target.parentNode.previousSibling.dataset.price;
+  let p_counter = e.target.nextSibling;
+  p_counter.innerText = Number(p_counter.innerText) + 1;
+  update_total(b_price);
+}
+
+const decrement = (e) => { // pass to update negative value
+  const b_price = e.target.parentNode.previousSibling.dataset.price;
+  let p_counter = e.target.previousSibling;
+  if (Number(p_counter.innerText) > 1) {
+    p_counter.innerText = Number(p_counter.innerText) - 1;
+    update_total('-' + b_price);
+  }
+}
+
+const update_total = (price) => {
+  const basket = document.querySelector('.basket');
+  let total_display = basket.lastChild.firstChild.firstChild.lastChild // get total amount
+  const total = Number(total_display.dataset.price) + Number(price);
+  total_display.dataset.price = total;
+  total_display.innerText = '$ ' + total + ',00';
+}
+
+//  ______________________ CREAT NODES ________________________________
 const pop_Up_node = (book_title, book_description) => {
   const book_info = newTag('div', { className: 'book_info hide' });
   const b_descritpion = newTag('div', { className: 'b_description' });
@@ -148,6 +188,7 @@ const summary = () => {
   const div_total = newTag('div', { id: 'total' });
   const p_total = newTag('p', { innerText: 'Sum total: ' });
   const bold_txt = newTag('b', { innerText: '$ 0,00' });
+  bold_txt.setAttribute('data-price', '0');
   p_total.append(bold_txt);
   div_total.append(p_total);
   const make_order = newTag('a', { href: '#', innerText: 'Make Order' });
