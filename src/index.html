@@ -13,6 +13,58 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
 
+  <section class="nothide">
+    <h2>Fill form for Delivery</h2>
+    <form action="#" method="post">
+      <label for="firstName">Name <span class="red">*</span></label>
+      <input name="firs tName" type="text" pattern="[a-zA-Z-]{4,30}" required id="firstName">
+      <span class="small hide">Space not allowed use dash(-) if two names. Min length 4 letters</span>
+      <label for="lastName">Last Name <span class="red">*</span></label>
+      <input name="last Name" type="text" pattern="[a-zA-Z-]{5,30}" required id="lastName">
+      <span class="small hide">Space not allowed use dash(-) if two Lastnames. Min length 5 letters</span>
+      <label for="date">Delivery date <span class="red">*</span></label>
+      <input name="delivery date" type="date" required id="date">
+      <span class="small hide">Start from tommorow</span>
+      <label for="street">Street <span class="red">*</span></label>
+      <input name="street" type="text" pattern="[^'\x22]{5,}" required id="street">
+      <span class="small hide">Do not use quotes. Min length 5 letters</span>
+      <label for="houseNum">House number <span class="red">*</span></label>
+      <input name="house number" type="text" pattern="[0-9]?[0-9-/]{1,}" required id="houseNum">
+      <span class="small hide">Only numbers if neccesary divided by slash (/) or dash(-)</span>
+      <label for="apartmentNum">Apartment number <span class="red">*</span></label>
+      <input name="apartment number" type="text" pattern="[0-9]?[0-9-]{1,}" required id="apartmentNum">
+      <span class="small hide">Only numbers, if neccesary divided by slash (/) or dash(-)</span>
+      <fieldset>
+        <legend>Chose Payment type <span class="red">*</span></legend>
+        <input type="radio" id="cash" name="payment type" value="cash" required>
+        <label for="cash">Cash</label>
+        <input type="radio" id="card" name="payment type" value="card" required>
+        <label for="card">card</label>
+      </fieldset>
+      <fieldset>
+        <legend>Choose 2 gifts</legend>
+        <label for="firstGift">Gift</label>
+        <select name="firstGift" id="firstGift">
+          <option value="-">Select gift</option>
+          <option value="pack">Pack as a gift</option>
+          <option value="postcard">Add postcard</option>
+          <option value="discount">2% discount for the next purchase</option>
+          <option value="pen">Branded pen or pencil</option>
+        </select>
+        <label for="secondGift">Gift</label>
+        <select name="secondGift" id="secondGift">
+          <option value="-">Select gift</option>
+          <option value="pack">Pack as a gift</option>
+          <option value="postcard">Add postcard</option>
+          <option value="discount">2% discount for the next purchase</option>
+          <option value="pen">Branded pen or pencil</option>
+        </select>
+      </fieldset>
+      <input type="submit" value="Proceed to payment" disabled>
+
+    </form>
+  </section>
+
   <script type="module" src="./components/main.js"></script>
 
 </body>

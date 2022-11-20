@@ -111,7 +111,7 @@ main {
 
 .basket {
   padding-inline: 2%;
-  height: fit-content;
+  height: min-content;
 }
 
 .basket_book {
@@ -152,4 +152,33 @@ a {
 
 .darkerborder {
   border: 5px dotted green;
+}
+
+/* FORM */
+input:focus:invalid {
+  border: red solid 3px;
+}
+
+.invalid {
+  border: red solid 3px;
+}
+
+section {
+  padding: 3%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  margin: auto;
+}
+
+fieldset {
+  width: 30%;
+  align-self: center;
+}
+
+.red {
+  color: red;
 }

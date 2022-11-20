@@ -228,3 +228,18 @@ export const footer = () => {
   return footer;
 }
 
+export const confirmOrder = (arr = []) => {
+  const order = newTag('div', {})
+  const ord_title = newTag('h3', { innerText: 'Your order is ready' })
+  order.append(ord_title);
+  for (let data of arr) {
+    const p_name = newTag('p', { innerText: data[0] + ' ' });
+    p_name.append(newTag('b', { innerText: data[1] }));
+    order.append(p_name);
+  }
+  const compl_button = newTag('button', { type: 'button', innerText: 'Back to begining' });
+  compl_button.addEventListener('click', () => window.location.reload())
+  order.append(compl_button)
+
+  return order;
+}
