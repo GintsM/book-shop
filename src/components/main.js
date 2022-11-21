@@ -38,18 +38,14 @@ const res = fetch(url)
 //  ______________________ VALIDATION ________________________________
 const collect_data = (e) => {
   e.preventDefault();
+  let collect_data = []
+  const formData = new FormData(e.target);
+  for (let pair of formData.entries()) {
+    collect_data.push([pair[0], pair[1]]);
+  }
   section.classList.add('hide');
   const footer = body.querySelector('footer');
-  const allInput = body.querySelectorAll('input');
-  let collect_data = []
-  allInput.forEach((el) => {
-    if (el.name) {
-      if (!(el.type === 'radio' && !el.checked)) {
-        collect_data.push([el.name, el.value])
-      }
-    }
-  })
-  body.insertBefore(confirmOrder(collect_data), footer); // this should appear as last
+  body.insertBefore(confirmOrder(collect_data), footer);
 }
 
 const date = document.getElementById('date');
