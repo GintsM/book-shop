@@ -1,4 +1,13 @@
-const uniq_id = () => Date.now().toString();
+const uniq_id = () => Math.floor(Math.random() * 6500 + 23);
+
+
+
+//  __________ TO DO
+
+//  - change layout with classes. so only visible what should be
+//  - refactor eventlisteners (not on each button)
+//    o Increment, close, make order on basket
+//    o add to bag, popUp, closepopup on Choice
 
 const newTag = (tag, options) => {
   return Object.assign(document.createElement(tag), options);
@@ -52,28 +61,45 @@ const closePop = (e) => {
 
 export const add_to_basket = (e) => {
   const basket = document.querySelector('.basket');
+
   let e_parent = {};
   e.type === 'click' ? e_parent = e.target.parentNode.parentNode.parentNode : e_parent = e;
-  const e_image = e_parent.previousSibling.cloneNode(true);
-  const p_prime = e_parent.cloneNode(true);
+  // if book already is in basket
+  const basket_contains = basket.querySelectorAll('.main_book_card');
+  let el_is_added = Boolean(basket_contains.item(0));
+  if (el_is_added) {
+    for (let el of basket_contains) {
+      if (el.querySelector('h3').innerText === e_parent.firstChild.innerText) {
+        increment(el.querySelector('.showMore'))
+        el_is_added = true;
+        break;
+      } else {
+        el_is_added = false;
+      }
+    }
+  }
+  if (!el_is_added) {
+    const e_image = e_parent.previousSibling.cloneNode(true);
+    const p_prime = e_parent.cloneNode(true);
 
-  // change button content/ to make a counter
-  const price = p_prime.lastChild.firstChild.dataset.price;// get units elements price                      
-  p_prime.lastChild.lastChild.firstChild.innerText = '+';  // 'show more' to increment button
-  p_prime.lastChild.lastChild.firstChild.addEventListener('click', increment);
-  p_prime.lastChild.lastChild.lastChild.innerText = '-';   // 'add to bag' to decrement button
-  p_prime.lastChild.lastChild.lastChild.addEventListener('click', decrement);
-  const p_counter = newTag('p', { className: 'b_count', innerText: '1' });
-  p_prime.lastChild.lastChild.insertBefore(p_counter, p_prime.lastChild.lastChild.lastChild);
+    // change button content/ to make a counter
+    const price = p_prime.lastChild.firstChild.dataset.price;// get units elements price
+    p_prime.querySelector('.showMore').innerText = '+';
+    p_prime.lastChild.lastChild.firstChild.addEventListener('click', increment);
+    p_prime.querySelector('.addToBag').innerText = '-';
+    p_prime.lastChild.lastChild.lastChild.addEventListener('click', decrement);
+    const p_counter = newTag('p', { className: 'b_count', innerText: '1' });
+    p_prime.lastChild.lastChild.insertBefore(p_counter, p_prime.lastChild.lastChild.lastChild);
 
-  //update total sum
-  update_total(price);
-  const main_book = newTag('div', { className: 'main_book_card' }); // can change this name
-  const span = newTag('span', { className: 'close_x for_basket', innerText: 'x' });
-  span.addEventListener('click', removeNode);
-  main_book.append(e_image, p_prime, span)
-  const firstChild = basket.firstChild;       // add new book to basket always as first 
-  basket.insertBefore(main_book, firstChild);
+    //update total sum
+    update_total(price);
+    const main_book = newTag('div', { className: 'main_book_card' });
+    const span = newTag('span', { className: 'close_x for_basket', innerText: 'x' });
+    span.addEventListener('click', removeNode);
+    main_book.append(e_image, p_prime, span)
+    const firstChild = basket.firstChild;       // add new book to basket always as first 
+    basket.insertBefore(main_book, firstChild);
+  }
 }
 
 const removeNode = (e) => {
@@ -88,8 +114,9 @@ const removeNode = (e) => {
 }
 
 const increment = (e) => {
-  const b_price = e.target.parentNode.previousSibling.dataset.price;
-  let p_counter = e.target.nextSibling;
+  const is_event = e.target ? e.target : e;
+  const b_price = is_event.parentNode.previousSibling.dataset.price;
+  let p_counter = is_event.nextSibling;
   p_counter.innerText = Number(p_counter.innerText) + 1;
   update_total(b_price);
 }
@@ -144,12 +171,12 @@ export const bookCard = (img, book_author, book_title, book_price, book_descript
   const h3 = newTag('h3', { innerText: book_author });
   const title = newTag('p', { className: 'title', innerText: book_title });
   const b_data = newTag('div', { className: 'b_data' });
-  const price = newTag('p', { innerText: '$ ' + book_price + ',00' });        // since we dont have pennies 
+  const price = newTag('p', { innerText: '$ ' + book_price + ',00', className: 'price' });        // since we dont have pennies 
   price.setAttribute('data-price', book_price);
   const button_block = newTag('div', { className: 'b_block' });
-  const show_more = newTag('button', { type: 'button', innerText: 'Show more' });
+  const show_more = newTag('button', { type: 'button', className: 'showMore', innerText: 'Show more' });
   show_more.addEventListener('click', popUp);
-  const add_to_bag = newTag('button', { type: 'button', innerText: 'Add to bag' });
+  const add_to_bag = newTag('button', { type: 'button', className: 'addToBag', innerText: 'Add to bag' });
   add_to_bag.addEventListener('click', add_to_basket);
   button_block.append(show_more);
   button_block.append(add_to_bag);
@@ -201,10 +228,15 @@ export const mainTag = () => {
   const main = newTag('main', {});
   const main_1_Div = newTag('div', { className: 'oval_top' });
   const choice = newTag('div', { className: 'choice' });
+
+  // main Title
+  const ch_title_div = newTag('div', { className: 'shelves_title' });
+  const ch_h2 = newTag('h2', { innerText: 'Books available today' });
+  ch_title_div.append(ch_h2);
+  choice.append(ch_title_div);
   const basket = newTag('div', { className: 'basket' });
   basket.addEventListener('dragenter', dragEnter)
   basket.addEventListener('dragover', dragOver);
-  // basket.addEventListener('dragleave', dragLeave);
   basket.addEventListener('drop', drop);
   const hr = newTag('hr', {});
   basket.append(hr);
@@ -212,6 +244,17 @@ export const mainTag = () => {
   main_1_Div.append(choice);
   main_1_Div.append(basket);
   main.append(main_1_Div);
+
+  // Torches on main page
+  const left_torch = newTag('div', { className: 'torch t_left' });
+  const left_t_img = newTag('img', { src: './assets/images/torch_left.png', alt: ' ' });
+  left_torch.append(left_t_img);
+  const right_torch = newTag('div', { className: 'torch t_right' });
+  const right_t_img = newTag('img', { src: './assets/images/torch_left.png', alt: ' ' });
+  right_torch.append(right_t_img);
+
+  main.append(left_torch, right_torch);
+
   return main;
 }
 
