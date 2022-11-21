@@ -61,7 +61,7 @@ const submitCheck = () => {
       allInput[allInput.length - 1].disabled = true;
     }
   })
-  if (counter >= 9) {
+  if (counter >= 13) {
     allInput[allInput.length - 1].disabled = false;
   }
 }

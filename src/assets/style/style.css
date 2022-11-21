@@ -78,6 +78,17 @@ main {
   border-radius: 8px;
 }
 
+button {
+  color: #6c1d13;
+  background-color: #e7b888;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  margin-inline: 2%;
+}
+
 /* pop up elem */
 .book_info {
   position: absolute;
@@ -144,7 +155,7 @@ footer {
   display: none;
 }
 
-:visited {
+a:visited {
   color: inherit;
 }
 
@@ -153,7 +164,7 @@ a {
 }
 
 .darkerborder {
-  border: 5px dotted green;
+  border: 5px dotted #008000;
 }
 
 /* Torches and Title */
@@ -203,30 +214,81 @@ a {
 }
 
 /* FORM */
-input:focus:invalid {
-  border: red solid 3px;
-}
-
-.invalid {
-  border: red solid 3px;
-}
-
 section {
   padding: 3%;
+  /* height: 85vh; */
 }
 
 form {
   display: flex;
   flex-direction: column;
-  width: 55%;
+  width: 30%;
   margin: auto;
+  align-items: center;
+}
+
+input {
+  width: 100%;
+  padding: 1%;
+  margin-block-end: 1%;
+}
+
+input:focus:invalid {
+  border: #ff0000 solid 3px;
+}
+
+input[type=submit]:disabled {
+  cursor: auto;
+  color: initial;
+  font-size: initial;
+  font-weight: initial;
+  margin-top: 5%;
+}
+
+input[type=submit] {
+  color: #008000;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  margin-top: 5%;
+}
+
+.invalid {
+  border: #ff0000 solid 3px;
 }
 
 fieldset {
-  width: 30%;
-  align-self: center;
+  display: flex;
+  width: 96%;
+  align-items: center;
 }
 
+#money {
+  width: 50%;
+}
+
+/* #cash,
+#card {
+  width: initial;
+} */
+
 .red {
-  color: red;
+  color: #ff0000;
+}
+
+body>div {
+  background-color: #9acd32;
+  padding: 2% 19%;
+}
+
+body>div>p {
+  text-transform: capitalize;
+}
+
+body>div>button {
+  width: 230px;
+  font-size: 25px;
+  font-weight: bold;
 }

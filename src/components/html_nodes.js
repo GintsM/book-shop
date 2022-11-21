@@ -226,7 +226,7 @@ const summary = () => { // in basket total amount
   bold_txt.setAttribute('data-price', '0');
   p_total.append(bold_txt);
   div_total.append(p_total);
-  const make_order = newTag('button', { className: 'delivery', type: 'button', innerText: 'Make Order' });
+  const make_order = newTag('button', { className: 'delivery', type: 'button', innerText: 'Confirm Order' });
   div_sum.append(div_total);
   div_sum.append(make_order)
   return div_sum;

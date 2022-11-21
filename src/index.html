@@ -17,7 +17,7 @@
     <h2>Fill form for Delivery</h2>
     <form action="#" method="post">
       <label for="firstName">Name <span class="red">*</span></label>
-      <input name="firs tName" type="text" pattern="[a-zA-Z-]{4,30}" required id="firstName">
+      <input name="first Name" type="text" pattern="[a-zA-Z-]{4,30}" required id="firstName">
       <span class="small hide">Space not allowed use dash(-) if two names. Min length 4 letters</span>
       <label for="lastName">Last Name <span class="red">*</span></label>
       <input name="last Name" type="text" pattern="[a-zA-Z-]{5,30}" required id="lastName">
@@ -34,7 +34,7 @@
       <label for="apartmentNum">Apartment number <span class="red">*</span></label>
       <input name="apartment number" type="text" pattern="[0-9]?[0-9-]{1,}" required id="apartmentNum">
       <span class="small hide">Only numbers, if neccesary divided by slash (/) or dash(-)</span>
-      <fieldset>
+      <fieldset id="money">
         <legend>Chose Payment type <span class="red">*</span></legend>
         <input type="radio" id="cash" name="payment type" value="cash" required>
         <label for="cash">Cash</label>
@@ -43,24 +43,16 @@
       </fieldset>
       <fieldset>
         <legend>Choose 2 gifts</legend>
-        <label for="firstGift">Gift</label>
-        <select name="firstGift" id="firstGift">
-          <option value="-">Select gift</option>
-          <option value="pack">Pack as a gift</option>
-          <option value="postcard">Add postcard</option>
-          <option value="discount">2% discount for the next purchase</option>
-          <option value="pen">Branded pen or pencil</option>
-        </select>
-        <label for="secondGift">Gift</label>
-        <select name="secondGift" id="secondGift">
-          <option value="-">Select gift</option>
-          <option value="pack">Pack as a gift</option>
-          <option value="postcard">Add postcard</option>
-          <option value="discount">2% discount for the next purchase</option>
-          <option value="pen">Branded pen or pencil</option>
-        </select>
+        <input type="checkbox" name="gift:" id="fr_gift" value="Pack as a gift">
+        <label for="fr_gift">Pack as a gift</label>
+        <input type="checkbox" name="gift:" id="sc_gift" value="Add postcard">
+        <label for="sc_gift">Add postcard</label>
+        <input type="checkbox" name="gift:" id="th_gift" value="2% discount for the next purchase">
+        <label for="th_gift">2% discount for the next purchase</label>
+        <input type="checkbox" name="gift:" id="four_gift" value="Branded pen or pencil">
+        <label for="four_gift">Branded pen or pencil</label>
       </fieldset>
-      <input type="submit" value="Proceed to payment" disabled>
+      <input type="submit" value="Complete" disabled>
 
     </form>
   </section>
