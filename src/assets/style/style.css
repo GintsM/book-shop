@@ -238,12 +238,20 @@ form {
 
 label {
   align-self: start;
+  font-size: 17px;
 }
 
 input {
   width: 100%;
   padding: 1%;
   margin-block-end: 1%;
+}
+
+.small {
+  font-size: 12px;
+  padding-block-end: 2%;
+  color: #6c1d13;
+  align-self: start;
 }
 
 input:focus:invalid {
