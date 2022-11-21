@@ -29,11 +29,11 @@
       <input name="street" type="text" pattern="[^'\x22]{5,}" required id="street">
       <span class="small hide">Do not use quotes. Min length 5 letters</span>
       <label for="houseNum">House number <span class="red">*</span></label>
-      <input name="house number" type="text" pattern="[1-9]" required id="houseNum">
+      <input name="house number" type="text" pattern="[1-9]+" required id="houseNum">
       <span class="small hide">Only numbers if neccesary divided by slash (/) or dash(-)</span>
       <label for="apartmentNum">Apartment number <span class="red">*</span></label>
       <input name="apartment number" type="text" pattern="\d[0-9-]*" required id="apartmentNum">
-      <span class="small hide">Only numbers, if neccesary divided by slash (/) or dash(-)</span>
+      <span class="small hide">Only numbers, if neccesary divided by dash(-)</span>
       <fieldset id="money">
         <legend>Chose Payment type <span class="red">*</span></legend>
         <input type="radio" id="cash" name="payment type" value="cash" required>
