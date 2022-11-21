@@ -7,7 +7,6 @@ const form = body.querySelector('form');
 const fragment = new DocumentFragment();
 fragment.append(header());
 fragment.append(mainTag());
-// fragment.append(footer());  // probably should add later as a lastchild to body (place for form)
 
 body.insertBefore(fragment, section); // to have something on screen while loading books
 body.append(footer());
@@ -75,13 +74,13 @@ const validityCheck = (e) => {
       e.target.classList.remove('invalid')
     }
     if (!(e.target.parentNode.tagName === 'FIELDSET')) {
-      e.target.nextSibling.nextSibling.classList.add('hide'); // remove tips for inputfield
+      e.target.nextElementSibling.classList.add('hide'); // remove tips for inputfield
     }
   }
 }
 
 const show_input_rulles = (e) => {
-  e.target.nextSibling.nextSibling.classList.remove('hide');
+  e.target.nextElementSibling.classList.remove('hide');
   if (e.target.classList.contains('invalid')) {
     e.target.classList.remove('invalid')
   }
