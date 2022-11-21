@@ -54,7 +54,7 @@ const collect_data = (e) => {
 
 const date = document.getElementById('date');
 const date_now = new Date();
-date.value = date_now.getFullYear() + '-' + (date_now.getMonth() + 1) + '-' + (date_now.getDate() + 1)
+// date.value = date_now.getFullYear() + '-' + (date_now.getMonth() + 1) + '-' + (date_now.getDate() + 1)
 date.setAttribute('min', date_now.getFullYear() + '-' + (date_now.getMonth() + 1) + '-' + (date_now.getDate() + 1));
 const allInput = form.querySelectorAll('input');
 
@@ -72,7 +72,8 @@ const submitCheck = () => {
 }
 
 const validityCheck = (e) => {
-  if (e.target.validity.valueMissing || e.target.validity.patternMismatch) {
+  console.log(e.target.validity)
+  if (e.target.validity.valueMissing || e.target.validity.patternMismatch || e.target.validity.rangeUnderflow) {
     e.target.classList.add('invalid')
   } else {
     if (e.target.classList.contains('invalid')) {
@@ -94,7 +95,7 @@ const show_input_rulles = (e) => {
 form.addEventListener('submit', collect_data);
 form.addEventListener('change', submitCheck);
 allInput.forEach(el => {
-  if (el.type === 'text') {
+  if (el.type === 'text' || el.type === 'date') {
     el.addEventListener('focus', show_input_rulles);
     el.addEventListener('blur', validityCheck);
   }
