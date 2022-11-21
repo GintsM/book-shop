@@ -1,0 +1,232 @@
+body {
+  margin: auto;
+}
+
+.flex_row {
+  display: flex;
+}
+
+header {
+  background-color: #000;
+  justify-content: space-around;
+  align-items: center;
+  height: 4em;
+}
+
+
+.logo {
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 120%;
+  text-align: center;
+  color: #fff;
+  width: 82px;
+  box-sizing: border-box;
+  border: 1px solid #fff;
+  border-radius: 2px;
+}
+
+#primary-navigation>a>img {
+  width: 22%;
+}
+
+body>header>p {
+  color: #fff;
+}
+
+/* Main */
+
+main {
+
+  background-color: #000;
+  /* border-radius: 6%; */
+  padding: 1%;
+}
+
+.oval_top {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  background-color: #fff;
+  gap: 18px;
+  border-radius: 46% 46% 0 0;
+  padding: 22% 9% 16px;
+}
+
+.choice,
+.basket {
+  padding-block: 2%;
+  padding-inline: 25px;
+  background-color: #eabc84;
+  border-radius: 15px;
+}
+
+.choice {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px 10px;
+  position: relative;
+}
+
+.main_book_card {
+  position: relative;
+  display: grid;
+  background-color: #f0c99a;
+  grid-template-columns: 1fr 3fr;
+  gap: 12px;
+  padding: 2%;
+  border: 2px solid #bd9f7a;
+  border-radius: 8px;
+}
+
+/* pop up elem */
+.book_info {
+  position: absolute;
+  background: #cedbe6;
+  z-index: 1;
+}
+
+.b_description {
+  position: relative;
+  padding-inline: 4%;
+}
+
+.pop_title {
+  margin-block-end: auto;
+}
+
+.close_x {
+  position: absolute;
+  background-color: red;
+  color: #fff;
+  top: -10px;
+  right: 10px;
+  font-size: 22px;
+  line-height: 19px;
+  padding: 1px 2px 3px 3px;
+  cursor: pointer;
+}
+
+
+.main_img_cont>img {
+  width: 100%;
+}
+
+.basket {
+  padding-inline: 2%;
+  height: min-content;
+}
+
+.basket_book {
+  margin-block: 0;
+  width: 85%;
+}
+
+.b_count {
+  display: inline;
+}
+
+/* replace close_x */
+.for_basket {
+  top: 10px;
+}
+
+.summary {
+  text-align: center;
+}
+
+footer {
+  color: #fff;
+  background-color: #000;
+  justify-content: space-around;
+}
+
+.hide {
+  display: none;
+}
+
+:visited {
+  color: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+.darkerborder {
+  border: 5px dotted green;
+}
+
+/* Torches and Title */
+.shelves_title {
+  position: absolute;
+  width: 248px;
+  top: -11%;
+  left: 35%;
+  background: #fff url(../images/sign_board.png) no-repeat right top;
+  background-size: 100%;
+  color: #6c1d13;
+  padding-inline: 2%;
+  text-align: center;
+}
+
+.shelves_title>h2 {
+  padding: 3%;
+}
+
+.torch {
+  position: absolute;
+  width: 7%;
+  top: 18%;
+}
+
+.t_right {
+  left: 4%;
+}
+
+.t_left {
+  right: 4%;
+}
+
+.t_left>img {
+  transform: scale(-1, 1);
+}
+
+.torch>img {
+  width: 100%;
+}
+
+/* Basket */
+.basket>.main_book_card>.main_book_cred>h3,
+.basket>.main_book_card>.main_book_cred>p,
+.basket>.main_book_card>.main_book_cred>.b_data>p {
+  margin-block: auto;
+}
+
+/* FORM */
+input:focus:invalid {
+  border: red solid 3px;
+}
+
+.invalid {
+  border: red solid 3px;
+}
+
+section {
+  padding: 3%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  margin: auto;
+}
+
+fieldset {
+  width: 30%;
+  align-self: center;
+}
+
+.red {
+  color: red;
+}
