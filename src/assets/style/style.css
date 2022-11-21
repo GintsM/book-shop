@@ -78,6 +78,10 @@ main {
   border-radius: 8px;
 }
 
+p {
+  font-size: 18px;
+}
+
 button {
   color: #6c1d13;
   background-color: #e7b888;
@@ -143,6 +147,11 @@ button {
 
 .summary {
   text-align: center;
+}
+
+div.basket>div.summary>button {
+  border: 1px solid #6c1d13;
+  margin-block-end: 4%;
 }
 
 footer {
@@ -215,8 +224,8 @@ a {
 
 /* FORM */
 section {
+  text-align: center;
   padding: 3%;
-  /* height: 85vh; */
 }
 
 form {
@@ -225,6 +234,10 @@ form {
   width: 30%;
   margin: auto;
   align-items: center;
+}
+
+label {
+  align-self: start;
 }
 
 input {
@@ -269,11 +282,6 @@ fieldset {
   width: 50%;
 }
 
-/* #cash,
-#card {
-  width: initial;
-} */
-
 .red {
   color: #ff0000;
 }
@@ -288,7 +296,6 @@ body>div>p {
 }
 
 body>div>button {
-  width: 230px;
-  font-size: 25px;
-  font-weight: bold;
+  background-color: #1cd9ad;
+  border: 1px solid #000;
 }
