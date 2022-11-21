@@ -48,8 +48,8 @@ main {
   grid-template-columns: 3fr 1fr;
   background-color: #fff;
   gap: 18px;
-  border-radius: 48% 48% 0 0;
-  padding: 22% 7% 16px;
+  border-radius: 46% 46% 0 0;
+  padding: 22% 9% 16px;
 }
 
 .choice,
@@ -57,12 +57,14 @@ main {
   padding-block: 2%;
   padding-inline: 25px;
   background-color: #eabc84;
+  border-radius: 15px;
 }
 
 .choice {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px 10px;
+  position: relative;
 }
 
 .main_book_card {
@@ -152,6 +154,52 @@ a {
 
 .darkerborder {
   border: 5px dotted green;
+}
+
+/* Torches and Title */
+.shelves_title {
+  position: absolute;
+  width: 248px;
+  top: -11%;
+  left: 35%;
+  background: #fff url(../images/sign_board.png) no-repeat right top;
+  background-size: 100%;
+  color: #6c1d13;
+  padding-inline: 2%;
+  text-align: center;
+}
+
+.shelves_title>h2 {
+  padding: 3%;
+}
+
+.torch {
+  position: absolute;
+  width: 7%;
+  top: 18%;
+}
+
+.t_right {
+  left: 4%;
+}
+
+.t_left {
+  right: 4%;
+}
+
+.t_left>img {
+  transform: scale(-1, 1);
+}
+
+.torch>img {
+  width: 100%;
+}
+
+/* Basket */
+.basket>.main_book_card>.main_book_cred>h3,
+.basket>.main_book_card>.main_book_cred>p,
+.basket>.main_book_card>.main_book_cred>.b_data>p {
+  margin-block: auto;
 }
 
 /* FORM */
