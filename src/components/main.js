@@ -63,10 +63,11 @@ const submitCheck = () => {
   allInput.forEach((el) => {
     if (!el.validity.valueMissing && !el.validity.patternMismatch) {
       counter += 1;
+      allInput[allInput.length - 1].disabled = true;
     }
   })
   if (counter >= 9) {
-    allInput[allInput.length - 1].disabled = false
+    allInput[allInput.length - 1].disabled = false;
   }
 }
 
@@ -77,18 +78,24 @@ const validityCheck = (e) => {
     if (e.target.classList.contains('invalid')) {
       e.target.classList.remove('invalid')
     }
-  }
-
-  if (!(e.target.parentNode.tagName === 'FIELDSET')) {
-    e.target.nextSibling.nextSibling.classList.add('hide'); // remove filling tips for field
+    if (!(e.target.parentNode.tagName === 'FIELDSET')) {
+      e.target.nextSibling.nextSibling.classList.add('hide'); // remove tips for inputfield
+    }
   }
 }
 
 const show_input_rulles = (e) => {
   e.target.nextSibling.nextSibling.classList.remove('hide');
+  if (e.target.classList.contains('invalid')) {
+    e.target.classList.remove('invalid')
+  }
 }
 
 form.addEventListener('submit', collect_data);
 form.addEventListener('change', submitCheck);
-form.addEventListener('blur', validityCheck);
-form.addEventListener('focus', show_input_rulles);
+allInput.forEach(el => {
+  if (el.type === 'text') {
+    el.addEventListener('focus', show_input_rulles);
+    el.addEventListener('blur', validityCheck);
+  }
+})
