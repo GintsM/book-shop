@@ -2,6 +2,7 @@ import { header, mainTag, footer, bookCard, confirmOrder } from "./html_nodes.js
 
 const body = document.querySelector('body');
 const section = document.querySelector('section');
+const form = body.querySelector('form');
 
 const fragment = new DocumentFragment();
 fragment.append(header());
@@ -17,7 +18,7 @@ const mainFunc = (data) => {
   for (let i in data) {
     // shorten name 'alias'
     const sh = data[i];
-    const card = bookCard(sh.imageLink, sh.author, sh.title, sh.price, sh.description, true);
+    const card = bookCard(sh.imageLink, sh.author, sh.title, sh.price, sh.description);
     fragment.append(card);
   }
   choice.append(fragment);
@@ -35,14 +36,26 @@ const res = fetch(url)
   });
 
 //  ______________________ VALIDATION ________________________________
+const collect_data = (e) => {
+  e.preventDefault();
+  section.classList.add('hide');
+  const footer = body.querySelector('footer');
+  const allInput = body.querySelectorAll('input');
+  let collect_data = []
+  allInput.forEach((el) => {
+    if (el.name) {
+      if (!(el.type === 'radio' && !el.checked)) {
+        collect_data.push([el.name, el.value])
+      }
+    }
+  })
+  body.insertBefore(confirmOrder(collect_data), footer); // this should appear as last
+}
 
-const form = body.querySelector('form');
 const date = document.getElementById('date');
 const date_now = new Date();
 date.value = date_now.getFullYear() + '-' + (date_now.getMonth() + 1) + '-' + (date_now.getDate() + 1)
 date.setAttribute('min', date_now.getFullYear() + '-' + (date_now.getMonth() + 1) + '-' + (date_now.getDate() + 1));
-
-
 const allInput = form.querySelectorAll('input');
 
 const submitCheck = () => {
@@ -54,16 +67,6 @@ const submitCheck = () => {
   })
   if (counter >= 9) {
     allInput[allInput.length - 1].disabled = false
-    let collect_data = []
-    allInput.forEach((el) => {
-      if (el.name) {
-        if (!(el.type === 'radio' && !el.checked)) {
-          collect_data.push([el.name, el.value])
-        }
-      }
-    })
-    const footer = body.querySelector('footer');
-    body.insertBefore(confirmOrder(collect_data), footer);
   }
 }
 
@@ -85,8 +88,7 @@ const show_input_rulles = (e) => {
   e.target.nextSibling.nextSibling.classList.remove('hide');
 }
 
-allInput.forEach((elem) => {
-  elem.addEventListener('change', submitCheck);
-  elem.addEventListener('blur', validityCheck);
-  elem.addEventListener('focus', show_input_rulles);
-})
+form.addEventListener('submit', collect_data);
+form.addEventListener('change', submitCheck);
+form.addEventListener('blur', validityCheck);
+form.addEventListener('focus', show_input_rulles);

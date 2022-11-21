@@ -107,8 +107,6 @@ const removeNode = (e) => {
   const b_amount = b_price.nextSibling.firstChild.nextSibling.innerText;
   const remove_sum = -Number(b_price.dataset.price) * Number(b_amount);
   update_total(remove_sum);
-
-  // remove a node
   const container_head = e.target.parentNode
   container_head.remove();
 }
@@ -138,6 +136,13 @@ const update_total = (price) => {
   total_display.innerText = '$ ' + total + ',00';
 }
 
+const delivery = () => {
+  const main = document.querySelector('main');
+  main.setAttribute("class", "hide");
+  const section_form = document.querySelector('section');
+  section_form.classList.remove('hide');
+}
+
 //  ______________________ CREAT NODES ________________________________
 const pop_Up_node = (book_title, book_description) => {
   const book_info = newTag('div', { className: 'book_info hide' });
@@ -146,27 +151,20 @@ const pop_Up_node = (book_title, book_description) => {
   const p = newTag('p', { className: 'pop_description', innerText: book_description });
   const span = newTag('span', { className: 'close_x', innerText: 'x' });
   span.addEventListener('click', closePop);
-
   b_descritpion.append(h4);
   b_descritpion.append(p);
   b_descritpion.append(span);
   book_info.append(b_descritpion);
   return book_info;
-
 }
 
 // Book Cards
-export const bookCard = (img, book_author, book_title, book_price, book_description, mainShelfs = false) => {
-  // mainShelfs is to determine were call is coming    
-  // <div class="main_book_card">
+export const bookCard = (img, book_author, book_title, book_price, book_description) => {
   const main_book = newTag('div', { className: 'main_book_card', id: uniq_id(), draggable: true });
-
   const img_cont = newTag('div', { className: 'main_img_cont', draggable: false });
   const image = newTag('img', { src: img, alt: book_title });
   img_cont.append(image);
   main_book.append(img_cont);
-
-  // class="main_book_cred
   const book_cred = newTag('div', { className: 'main_book_cred' });
   const h3 = newTag('h3', { innerText: book_author });
   const title = newTag('p', { className: 'title', innerText: book_title });
@@ -186,15 +184,12 @@ export const bookCard = (img, book_author, book_title, book_price, book_descript
   book_cred.append(title);
   book_cred.append(b_data);
   main_book.append(book_cred);
-
-  if (mainShelfs) main_book.append(pop_Up_node(book_title, book_description));
+  main_book.append(pop_Up_node(book_title, book_description));
   main_book.addEventListener('dragstart', dragstart);
   main_book.addEventListener('dragend', dragend);
-
   return main_book;
 }
 
-// Header and Main will be called before any data
 export const header = () => {
   const header = newTag('header', { className: "flex_row" })
   const h1 = newTag('h1', { id: 'primary-navigation', className: 'logo' });
@@ -210,7 +205,7 @@ export const header = () => {
   return header;
 }
 
-const summary = () => {
+const summary = () => { // in basket total amount
   const div_sum = newTag('div', { className: 'summary' });
   const div_total = newTag('div', { id: 'total' });
   const p_total = newTag('p', { innerText: 'Sum total: ' });
@@ -218,7 +213,8 @@ const summary = () => {
   bold_txt.setAttribute('data-price', '0');
   p_total.append(bold_txt);
   div_total.append(p_total);
-  const make_order = newTag('a', { href: '#', innerText: 'Make Order' });
+  const make_order = newTag('button', { type: 'button', innerText: 'Make Order' });
+  make_order.addEventListener('click', delivery);
   div_sum.append(div_total);
   div_sum.append(make_order)
   return div_sum;
@@ -247,14 +243,12 @@ export const mainTag = () => {
 
   // Torches on main page
   const left_torch = newTag('div', { className: 'torch t_left' });
-  const left_t_img = newTag('img', { src: './assets/images/torch_left.png', alt: ' ' });
+  const left_t_img = newTag('img', { src: './assets/images/torch_left.png', alt: 'old torch' });
   left_torch.append(left_t_img);
   const right_torch = newTag('div', { className: 'torch t_right' });
-  const right_t_img = newTag('img', { src: './assets/images/torch_left.png', alt: ' ' });
+  const right_t_img = newTag('img', { src: './assets/images/torch_left.png', alt: 'old torch' });
   right_torch.append(right_t_img);
-
   main.append(left_torch, right_torch);
-
   return main;
 }
 
@@ -283,6 +277,5 @@ export const confirmOrder = (arr = []) => {
   const compl_button = newTag('button', { type: 'button', innerText: 'Back to begining' });
   compl_button.addEventListener('click', () => window.location.reload())
   order.append(compl_button)
-
   return order;
 }
