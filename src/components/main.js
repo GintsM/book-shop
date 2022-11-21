@@ -54,14 +54,14 @@ const collect_data = (e) => {
 
 const date = document.getElementById('date');
 const date_now = new Date();
-// date.value = date_now.getFullYear() + '-' + (date_now.getMonth() + 1) + '-' + (date_now.getDate() + 1)
+date.value = date_now.getFullYear() + '-' + (date_now.getMonth() + 1) + '-' + (date_now.getDate() + 1)
 date.setAttribute('min', date_now.getFullYear() + '-' + (date_now.getMonth() + 1) + '-' + (date_now.getDate() + 1));
 const allInput = form.querySelectorAll('input');
 
 const submitCheck = () => {
   let counter = 0;
   allInput.forEach((el) => {
-    if (!el.validity.valueMissing && !el.validity.patternMismatch) {
+    if (el.checkValidity()) {
       counter += 1;
       allInput[allInput.length - 1].disabled = true;
     }
@@ -72,8 +72,7 @@ const submitCheck = () => {
 }
 
 const validityCheck = (e) => {
-  console.log(e.target.validity)
-  if (e.target.validity.valueMissing || e.target.validity.patternMismatch || e.target.validity.rangeUnderflow) {
+  if (!e.target.checkValidity()) {
     e.target.classList.add('invalid')
   } else {
     if (e.target.classList.contains('invalid')) {
