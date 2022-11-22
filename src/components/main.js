@@ -53,12 +53,36 @@ date.value = date_now.getFullYear() + '-' + (date_now.getMonth() + 1) + '-' + (d
 date.setAttribute('min', date_now.getFullYear() + '-' + (date_now.getMonth() + 1) + '-' + (date_now.getDate() + 1));
 const allInput = form.querySelectorAll('input');
 
-const submitCheck = () => {
-  let counter = 0;
+// const checkboxCheck = (e) => {
+//   console.log(e);
+// }
+
+const changeChecked = (el) => {
+  const check_box = form.querySelectorAll('.check_b');
+  check_box.forEach(ch_b => {
+    if (ch_b.classList.contains('last')) {
+      ch_b.classList.remove('last');
+      ch_b.checked = false;
+    }
+    el.classList.add('last');
+    el.checked = true;
+  })
+
+}
+
+const submitCheck = (e) => {
+  let counter = 0, ch_counter = 0;
   allInput.forEach((el) => {
     if (el.checkValidity()) {
       counter += 1;
       allInput[allInput.length - 1].disabled = true;
+    }
+    if (el.type === 'checkbox') {
+      el.checked ? ch_counter += 1 : '';
+      if (ch_counter > 1) e.target.classList.add('last');
+      if (ch_counter > 2) {
+        changeChecked(e.target);
+      }
     }
   })
   if (counter >= 13) {
